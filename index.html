@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-апта. Білім берудегі аудиоконтент және дыбыспен жұмыс істеу технологиялары</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+            --accent: #eff6ff;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            max-width: 850px;
+            margin: 0 auto 15px;
+            line-height: 1.3;
+        }
+        .goal-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+        .container {
+            max-width: 880px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .keywords-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .keywords-title {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            background: var(--accent);
+            color: var(--primary-dark);
+            border: 1px solid #bfdbfe;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tag:hover, .tag.active {
+            background: var(--primary);
+            color: white;
+        }
+        .tag-desc {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            display: none;
+            border-left: 4px solid var(--primary);
+        }
+        .section-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section-card h2 {
+            color: var(--secondary);
+            font-size: 1.35rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .section-card p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+        .section-card p:last-child {
+            margin-bottom: 0;
+        }
+        /* Interactive Simulators */
+        .interactive-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: #f8fafc;
+            border: 1px dashed #94a3b8;
+            border-radius: 10px;
+        }
+        .interactive-box h3 {
+            font-size: 1rem;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+        .sim-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .sim-control label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .sim-control input[type="range"] {
+            width: 100%;
+        }
+        .meter-bar {
+            height: 18px;
+            background: #e2e8f0;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .meter-fill {
+            height: 100%;
+            width: 65%;
+            background: #22c55e;
+            transition: width 0.3s, background 0.3s;
+        }
+        .sim-status {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+        }
+        .checklist-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+        /* Control Questions */
+        .question-item {
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .question-item label {
+            display: block;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+        .question-item textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 70px;
+        }
+        .btn-hint {
+            margin-top: 6px;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .hint-text {
+            display: none;
+            margin-top: 6px;
+            font-size: 0.88rem;
+            color: #475569;
+            background: #eff6ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.4rem; }
+            .section-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>10-апта. Білім берудегі аудиоконтент және дыбыспен жұмыс істеу технологиялары</h1>
+    <div class="goal-box">
+        <strong>Дәрістің мақсаты:</strong> Оқу аудиоконтентінің түрлерін, дыбыс жазу мен цифрлық өңдеу кезеңдерін, подкаст және аудиотүсіндірменің педагогикалық мүмкіндіктерін түсіндіру; сапалы әрі қолжетімді оқу аудиоматериалын жобалауды үйрету.
+    </div>
+</header>
+
+<div class="container">
+    <!-- Тірек ұғымдар -->
+    <div class="keywords-section">
+        <div class="keywords-title">Тірек ұғымдар (анықтамасын көру үшін басыңыз):</div>
+        <div class="tags" id="tagsContainer">
+            <span class="tag" data-desc="Ақпаратты дыбыстық түрде жеткізетін оқу материалы (подкаст, аудиодәріс, дикторлық түсіндірме, т.б.).">аудиоконтент</span>
+            <span class="tag" data-desc="Ортада таралатын, микрофон арқылы электрлік сигналға айналатын механикалық тербеліс.">дыбыс толқыны</span>
+            <span class="tag" data-desc="Механикалық дыбыс толқынын электрлік сигналға түрлендіретін құрылғы.">микрофон</span>
+            <span class="tag" data-desc="Аналогты дыбысты цифрлық форматқа айналдыру кезінде секундына алынатын өлшемдер саны (мысалы, 44.1 кГц).">үлгілеу жиілігі</span>
+            <span class="tag" data-desc="Негізгі сөйлеу мазмұнына кедергі келтіретін қоршаған ортаның немесе техниканың бөгде дыбыстары.">шу</span>
+            <span class="tag" data-desc="Дыбыс сигналының қаттылығы мен қуатының көрсеткіші (децибелмен өлшенеді).">дыбыс деңгейі</span>
+            <span class="tag" data-desc="Жазбадағы қателер мен артық үзілістерді қиып, фрагменттерді логикалық ретпен біріктіру процесі.">монтаж</span>
+            <span class="tag" data-desc="Тыңдауға ыңғайлы, белгілі бір тақырыптық құрылымы бар жүйелі аудиобағдарлама.">подкаст</span>
+            <span class="tag" data-desc="Аудиоматериалда айтылған сөздердің толық әрі дәл мәтіндік нұсқасы.">транскрипт</span>
+            <span class="tag" data-desc="Музыка, дыбыстық эффект немесе бөгде дауыс жазбасын пайдалану шарттарын реттейтін заңды норма.">авторлық құқық</span>
+        </div>
+        <div class="tag-desc" id="tagDesc"></div>
+    </div>
+
+    <!-- 1-бөлім -->
+    <div class="section-card">
+        <h2>1. Аудиоконтент білім беру ресурсы ретінде</h2>
+        <p>Аудиоконтент – ақпаратты дыбыстық түрде жеткізетін оқу материалы. Оған дикторлық түсіндірме, подкаст, аудиодәріс, сұхбат, дыбыстық нұсқаулық, музыкалық мысал және практикалық жаттығуға арналған жазба жатады. Аудио оқушыға мәтінді оқумен қатар басқа қабылдау жолын ұсынады, ал кей жағдайда жолда немесе экранға қарау мүмкін болмаған уақытта мазмұнды тыңдауға жағдай жасайды. Дегенмен аудио барлық тақырыпқа бірдей тиімді емес: күрделі формуланы, код құрылымын немесе кеңістіктік схеманы тек дауыспен түсіндіру қиын болуы мүмкін.</p>
+        <p>Педагог аудионы оқу мақсатына қарай таңдайды. Терминнің дұрыс айтылуын үйрету, кәсіби сұхбатты талдау, тарихи оқиғаны баяндау немесе алгоритм қадамын қысқаша түсіндіру үшін дыбыс пайдалы. Ал бағдарламалау кодындағы тыныс белгілері мен шегіністерді үйреткенде аудио экрандағы кодты толықтыруы тиіс. Мультимедиалық оқытуда аудиоконтент жеке ресурс та, бейнемен синхрондалған компонент те бола алады.</p>
+    </div>
+
+    <!-- 2-бөлім -->
+    <div class="section-card">
+        <h2>2. Дыбысты жазудың техникалық негіздері</h2>
+        <p>Дыбыс – ортада таралатын механикалық толқын. Микрофон оны электрлік сигналға, ал цифрлық жазу жүйесі сандық дерекке түрлендіреді. Жазба сапасына микрофон түрі, оның ауыздан арақашықтығы, бөлменің жаңғырығы, фондық шу және кіріс деңгейі әсер етеді. Жоғары бағалы микрофонның болуы міндетті түрде жақсы жазба деген сөз емес; тыныш ортада дұрыс орналасқан қарапайым микрофон жиі әлдеқайда анық нәтиже береді.</p>
+        <p>Жазу басталғанға дейін қысқа сынақ қажет. Диктор бірнеше сөйлем оқиды, жазбаны тыңдап, дыбыстың тым бәсең не қатты емес екенін тексереді. Кіріс деңгейі шамадан тыс жоғары болса, дыбыс бұрмаланып, кейін түзету қиындайды. Микрофонға тым жақын сөйлеу тыныс дыбысы мен жарылмалы дауыссыздарды күшейтуі мүмкін. Диктордың біркелкі қарқыны, анық артикуляциясы және маңызды тұста қысқа үзіліс жасауы оқу материалының түсініктілігін арттырады.</p>
+        <p>Цифрлық дыбыстың техникалық сипаттамаларына үлгілеу жиілігі, бит тереңдігі, арналар саны және кодтау пішімі жатады. Монтажға арналған бастапқы жазбаны сапаны сақтайтын форматта қалдырып, таратуға арналған ықшам көшірмесін бөлек жасауға болады. Бұл кейін қайта өңдегенде артық сапа жоғалтуды болдырмайды.</p>
+
+        <!-- Интерактивті симулятор -->
+        <div class="interactive-box">
+            <h3>🎛️ Дыбыс жазу сапасының симуляторы</h3>
+            <div class="sim-controls">
+                <div class="sim-control">
+                    <label>Микрофонға дейінгі қашықтық: <span id="distVal">15</span> см</label>
+                    <input type="range" id="distRange" min="2" max="50" value="15">
+                </div>
+                <div class="sim-control">
+                    <label>Кіріс деңгейі (Gain): <span id="gainVal">65</span>%</label>
+                    <input type="range" id="gainRange" min="10" max="100" value="65">
+                </div>
+            </div>
+            <div>Дыбыс индикаторы:</div>
+            <div class="meter-bar">
+                <div class="meter-fill" id="meterFill"></div>
+            </div>
+            <div class="sim-status" id="simStatus">✅ Оңтайлы жағдай: дауыс анық, бұрмалану жоқ.</div>
+        </div>
+    </div>
+
+    <!-- 3-бөлім -->
+    <div class="section-card">
+        <h2>3. Аудионы цифрлық өңдеу кезеңдері</h2>
+        <p>Монтаж жұмысы жазбаны тыңдап, қажетсіз тыныштықты, қателесіп айтылған сөйлемді және артық қайталауды белгілеуден басталады. Кейін дұрыс дубль таңдалып, фрагменттер логикалық ретпен біріктіріледі. Шуды азайту құралдары пайдаланылуы мүмкін, бірақ оларды шамадан тыс қолдану адамның дауысын жасанды немесе түсініксіз етіп жіберуі ықтимал. Сондықтан өңдеу мақсаты – дыбысты «әсерлі» қылу емес, сөзді айқын жеткізу.</p>
+        <p>Дыбыс деңгейін теңестіру тыңдаушының әр бөлімде дыбыс тетігін қайта реттемеуіне көмектеседі. Эквалайзер белгілі жиілік диапазондарын күшейтіп не әлсіретеді, компрессор қатты және бәсең бөліктер арасындағы айырманы жұмсартуға қолданылады. Әр эффектіні негізгі мәселе анық болғанда ғана енгізген орынды. Дыбыстық ауысулар мен фондық музыканы қолданғанда сөйлеу мазмұнына кедергі келтірмеу, авторлық лицензияны тексеру және қажетсіз эмоционалдық қысым тудырмау маңызды.</p>
+        <p>Audacity сияқты аудиоредакторлар жазбаны кесуге, дыбыс деңгейін өзгертуге және негізгі өңдеуге мүмкіндік береді. Бейнемонтаж редакторларында да аудиожолды түзету функциялары бар. Құрал таңдаудан бұрын жұмыс мақсатын анықтау қажет: тек дауыс жазуға жеңіл редактор жеткілікті болуы мүмкін, ал бірнеше сұхбат пен дыбыс қабатын біріктіруге күрделірек орта керек.</p>
+    </div>
+
+    <!-- 4-бөлім -->
+    <div class="section-card">
+        <h2>4. Подкаст пен аудиотүсіндірменің педагогикалық дизайны</h2>
+        <p>Подкаст – тыңдауға ыңғайлы, әдетте тақырыптық құрылымы бар аудиобағдарлама. Білім беру подкасты бір мәселені талқылау, сарапшымен сұхбат, кәсіби жағдайды зерттеу немесе бірнеше көзқарасты салыстыру түрінде жасалуы мүмкін. Аудиотүсіндірме көбіне қысқа болып, нақты тапсырмаға, терминге немесе көрнекі материалға байланысты беріледі. Екі форматта да тыңдаушының не білуі және тыңдағаннан кейін не істеуі қажет екені анықталуы тиіс.</p>
+        <p>Қысқа аудиоматериалдың ұсынылатын логикалық құрылымы мынадай: мәселені қою, қажетті бастапқы ұғымды еске түсіру, негізгі түсіндірме, бір мысал, қорытынды және тыңдаушыға сұрақ. Мысалы, «Алгоритмдер неліктен тиімділігі бойынша ерекшеленеді?» деген шағын подкастта екі іздеу тәсілі салыстырылады. Диктор күрделі белгілеулерді ұзақ тізбелемей, «элементтердің жартысын алып тастау» секілді ұғымдық түсіндірмені пайдаланады. Нақты есепті орындауға қажет болса, қосымша кесте немесе сурет беріледі.</p>
+        <p>Оқушы белсенділігін арттыру үшін аудионы тыңдаудың алдында болжам сұрағы, тыңдау барысында тірек сөздерді белгілеу, ал соңында дәлелді қысқа жауап беру тапсырмасы енгізіледі. Сұрақсыз ұзақ жазба кейде пассивті тыңдауға ұласады. Сондықтан аудио сабақтағы әрекеттер тізбегінің бір бөлігі ретінде жоспарланады.</p>
+    </div>
+
+    <!-- 5-бөлім -->
+    <div class="section-card">
+        <h2>5. Қолжетімділік және жариялау әдебі</h2>
+        <p>Аудиоматериалға транскрипт қосу ақпаратты есту арқылы қабылдай алмайтын білім алушыларға, терминді көзбен көргісі келетіндерге және шетелдік сөздерді жазып алуға мұқтаж тыңдаушыға көмектеседі. Ұзын материал тарауларға бөлініп, уақыт белгілерімен берілсе, қажетті жерді қайта табу жеңілдейді. Дыбыс мазмұнының толық әрі сенімді нұсқасы мәтін түрінде сақталуы оның ізделуін де жақсартады.</p>
+        <p>Сұхбат жазғанда қатысушының келісімі алынады. Оқушылардың жеке деректерін немесе рұқсатсыз жазылған дауыстарын жариялауға болмайды. Музыка мен дыбыстық эффект пайдаланғанда лицензиясы, авторы және қолдану шарттары қарастырылады. ЖИ арқылы дауыс синтезделсе, оның жасанды екенін ашық көрсету және нақты адамның дауысына ұқсату мәселесінде ерекше сақтық таныту қажет.</p>
+    </div>
+
+    <!-- 6-бөлім -->
+    <div class="section-card">
+        <h2>6. Практикалық сценарий және сапаны бағалау</h2>
+        <p>Студентке «Интернеттегі қауіпсіз мінез-құлық» тақырыбында 3–5 минуттық аудиотүсіндірме жасау тапсырмасы берілсін. Ол алдымен тыңдаушы аудиториясын анықтайды, үш негізгі кеңес таңдайды және әр кеңеске нақты мысал жазады. Кейін қысқа сценарий құрып, дыбыс сынағын өткізеді, мәтінді жазады, қателерді монтаждайды, транскрипт дайындайды. Соңында басқа студент түсіндірмені тыңдап, негізгі ойды өз сөзімен қайталап береді.</p>
+        <p>Бағалауда мазмұн дұрыстығы, сөйлеудің анықтығы, логикалық реттілік, дыбыс тазалығы, ұзақтықтың орындылығы, авторлық талаптар және қолжетімділік ескеріледі. Құралдың қымбаттығы емес, тыңдаушының нақты оқу нәтижесі басты дәлел болады.</p>
+
+        <!-- Практикалық чек-лист -->
+        <div class="interactive-box">
+            <h3>✅ Аудиожобаны орындау чек-листі</h3>
+            <label class="checklist-item"><input type="checkbox"> 1. Тыңдаушы аудиториясы анықталды</label>
+            <label class="checklist-item"><input type="checkbox"> 2. Үш негізгі кеңес пен нақты мысалдар жазылды</label>
+            <label class="checklist-item"><input type="checkbox"> 3. Қысқа сценарий құрылып, дыбыс сынағы өткізілді</label>
+            <label class="checklist-item"><input type="checkbox"> 4. Мәтін жазылып, қателер монтаждалды</label>
+            <label class="checklist-item"><input type="checkbox"> 5. Транскрипт дайындалды және авторлық құқық тексерілді</label>
+        </div>
+    </div>
+
+    <!-- Қорытынды -->
+    <div class="section-card">
+        <h2>Қорытынды</h2>
+        <p>Білім беру аудиоконтенті тыңдау арқылы үйренуге жағдай жасайды, бірақ оның сапасы жоспарланған сценарийге, анық жазбаға, сауатты монтажға және қолжетімділікке тәуелді. Мұғалім дыбыстың техникалық сипаттарын педагогикалық міндетпен байланыстыра білуі тиіс.</p>
+    </div>
+
+    <!-- Бақылау сұрақтары -->
+    <div class="section-card">
+        <h2>Бақылау сұрақтары</h2>
+        <div class="question-item">
+            <label>1) Аудио қай оқу міндеттеріне тиімді?</label>
+            <textarea placeholder="Жауабыңызды осында жазыңыз..."></textarea>
+            <button class="btn-hint" onclick="toggleHint(this)">Дәрістен көмекші бағдар көру</button>
+            <div class="hint-text">Терминнің дұрыс айтылуын үйрету, кәсіби сұхбатты талдау, тарихи оқиғаны баяндау, алгоритм қадамын қысқаша түсіндіру және жолда/экранға қарау мүмкін болмаған кезде ақпарат беру үшін тиімді.</div>
+        </div>
+        <div class="question-item">
+            <label>2) Жазба сапасына қандай факторлар әсер етеді?</label>
+            <textarea placeholder="Жауабыңызды осында жазыңыз..."></textarea>
+            <button class="btn-hint" onclick="toggleHint(this)">Дәрістен көмекші бағдар көру</button>
+            <div class="hint-text">Микрофон түрі, оның ауыздан арақашықтығы, бөлменің жаңғырығы, фондық шу, кіріс деңгейі және диктордың сөйлеу қарқыны мен артикуляциясы әсер етеді.</div>
+        </div>
+        <div class="question-item">
+            <label>3) Монтаждағы шуды азайту мен деңгейді теңестіру не үшін қажет?</label>
+            <textarea placeholder="Жауабыңызды осында жазыңыз..."></textarea>
+            <button class="btn-hint" onclick="toggleHint(this)">Дәрістен көмекші бағдар көру</button>
+            <div class="hint-text">Сөзді айқын жеткізу үшін және тыңдаушының әр бөлімде дыбыс тетігін қайта-қайта реттемеуі, яғни жайлы тыңдауы үшін қажет.</div>
+        </div>
+        <div class="question-item">
+            <label>4) Подкаст пен аудиотүсіндірменің айырмашылығы қандай?</label>
+            <textarea placeholder="Жауабыңызды осында жазыңыз..."></textarea>
+            <button class="btn-hint" onclick="toggleHint(this)">Дәрістен көмекші бағдар көру</button>
+            <div class="hint-text">Подкаст — тақырыптық құрылымы бар, бір мәселені талқылайтын немесе сұхбат түріндегі кеңірек аудиобағдарлама; ал аудиотүсіндірме — нақты тапсырмаға, терминге немесе көрнекі материалға арналған қысқа жазба.</div>
+        </div>
+        <div class="question-item">
+            <label>5) Аудиоматериалдың қолжетімділігін қалай қамтамасыз етеміз?</label>
+            <textarea placeholder="Жауабыңызды осында жазыңыз..."></textarea>
+            <button class="btn-hint" onclick="toggleHint(this)">Дәрістен көмекші бағдар көру</button>
+            <div class="hint-text">Толық әрі сенімді мәтіндік транскрипт қосу, ұзын материалды тарауларға бөлу және уақыт белгілерін (тайм-код) көрсету арқылы қамтамасыз етеміз.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Тірек ұғымдар интерактиві
+    const tags = document.querySelectorAll('.tag');
+    const tagDesc = document.getElementById('tagDesc');
+
+    tags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            tags.forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+            tagDesc.style.display = 'block';
+            tagDesc.innerHTML = `<strong>${tag.textContent}:</strong> ${tag.getAttribute('data-desc')}`;
+        });
+    });
+
+    // Дыбыс жазу симуляторы
+    const distRange = document.getElementById('distRange');
+    const gainRange = document.getElementById('gainRange');
+    const distVal = document.getElementById('distVal');
+    const gainVal = document.getElementById('gainVal');
+    const meterFill = document.getElementById('meterFill');
+    const simStatus = document.getElementById('simStatus');
+
+    function updateSimulator() {
+        const dist = parseInt(distRange.value);
+        const gain = parseInt(gainRange.value);
+        distVal.textContent = dist;
+        gainVal.textContent = gain;
+
+        let level = gain - (dist - 15) * 1.2;
+        level = Math.max(5, Math.min(100, level));
+        meterFill.style.width = level + '%';
+
+        if (dist < 7) {
+            meterFill.style.background = '#ef4444';
+            simStatus.textContent = '⚠️ Микрофонға тым жақын: тыныс дыбысы мен жарылмалы дауыссыздар күшейіп кетті!';
+        } else if (level > 85) {
+            meterFill.style.background = '#ef4444';
+            simStatus.textContent = '⚠️ Кіріс деңгейі тым жоғары: дыбыс бұрмаланады (клиппинг)!';
+        } else if (level < 30) {
+            meterFill.style.background = '#f59e0b';
+            simStatus.textContent = '🔈 Дыбыс тым бәсең: фондық шу басым болуы мүмкін.';
+        } else {
+            meterFill.style.background = '#22c55e';
+            simStatus.textContent = '✅ Оңтайлы жағдай: дауыс анық, бұрмалану жоқ.';
+        }
+    }
+
+    distRange.addEventListener('input', updateSimulator);
+    gainRange.addEventListener('input', updateSimulator);
+
+    // Бақылау сұрақтарының көмекші мәтіні
+    function toggleHint(btn) {
+        const hint = btn.nextElementSibling;
+        hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
